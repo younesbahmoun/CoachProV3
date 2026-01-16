@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Coach - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-dumbbell"></i>
+                CoachConnect
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="user-avatar">MD</div>
+                    <div>
+                        <div style="font-weight: 600;">Martin Dupont</div>
+                        <div style="font-size: 0.85rem; opacity: 0.9;">Coach Professionnel</div>
+                    </div>
+                </div>
+                <button class="btn btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Déconnexion
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('dashboard')">
+                <i class="fas fa-home"></i>
+                Tableau de bord
+            </button>
+            <button class="nav-tab" onclick="switchTab('mes-seances')">
+                <i class="fas fa-calendar-alt"></i>
+                Mes séances
+            </button>
+            <button class="nav-tab" onclick="switchTab('reservations')">
+                <i class="fas fa-calendar-check"></i>
+                Réservations
+            </button>
+            <button class="nav-tab" onclick="switchTab('profil')">
+                <i class="fas fa-user-circle"></i>
+                Mon profil
+            </button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Stats Cards -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>12</h3>
+                        <p>Séances créées</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>8</h3>
+                        <p>Séances réservées</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>4</h3>
+                        <p>Séances disponibles</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>15</h3>
+                        <p>Clients actifs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-bolt"></i>
+                        Actions rapides
+                    </h2>
+                </div>
+                <div class="dashboard-grid">
+                    <button class="btn btn-primary" onclick="openModal('addSeanceModal')" style="padding: 1.25rem; justify-content: center; font-size: 1rem;">
+                        <i class="fas fa-plus-circle"></i>
+                        Créer une nouvelle séance
+                    </button>
+                    <button class="btn btn-outline" onclick="switchTab('mes-seances')" style="padding: 1.25rem; justify-content: center; font-size: 1rem;">
+                        <i class="fas fa-eye"></i>
+                        Voir mes séances
+                    </button>
+                    <button class="btn btn-outline" onclick="switchTab('profil')" style="padding: 1.25rem; justify-content: center; font-size: 1rem;">
+                        <i class="fas fa-edit"></i>
+                        Modifier mon profil
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prochaines Séances -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar-alt"></i>
+                        Mes prochaines séances
+                    </h2>
+                </div>
+
+                <div class="seance-grid">
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="seance-title">Séance de Musculation</span>
+                                <span class="status-badge status-reservee">Réservée</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span>Jean Sportif</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Lundi 05 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>10:00 - 11:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-eye"></i>
+                                Détails
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="seance-title">Séance de Musculation</span>
+                                <span class="status-badge status-disponible">Disponible</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Mercredi 07 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>14:00 - 15:30</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>90 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-warning btn-sm" onclick="openEditModal(this)">
+                                <i class="fas fa-edit"></i>
+                                Modifier
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSeance(this)">
+                                <i class="fas fa-trash"></i>
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mes Séances Tab -->
+        <div id="mes-seances" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar-alt"></i>
+                        Toutes mes séances
+                    </h2>
+                    <button class="btn btn-primary" onclick="openModal('addSeanceModal')">
+                        <i class="fas fa-plus"></i>
+                        Créer une séance
+                    </button>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Vous pouvez modifier ou supprimer vos séances disponibles à tout moment.</span>
+                </div>
+
+                <div class="seance-grid">
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="seance-title">Séance de Musculation</span>
+                                <span class="status-badge status-reservee">Réservée</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span>Jean Sportif</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>05/01/2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>10:00 - 11:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-eye"></i>
+                                Détails client
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="seance-title">Séance de Musculation</span>
+                                <span class="status-badge status-disponible">Disponible</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>07/01/2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>14:00 - 15:30</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>90 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-warning btn-sm" onclick="openEditModal(this)">
+                                <i class="fas fa-edit"></i>
+                                Modifier
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSeance(this)">
+                                <i class="fas fa-trash"></i>
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="seance-title">Séance de Musculation</span>
+                                <span class="status-badge status-disponible">Disponible</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>09/01/2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>16:00 - 17:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-warning btn-sm" onclick="openEditModal(this)">
+                                <i class="fas fa-edit"></i>
+                                Modifier
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSeance(this)">
+                                <i class="fas fa-trash"></i>
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Réservations Tab -->
+        <div id="reservations" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar-check"></i>
+                        Séances réservées par mes clients
+                    </h2>
+                </div>
+
+                <div class="seance-grid">
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="seance-title">Séance de Musculation</span>
+                                <span class="status-badge status-reservee">Confirmée</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span><strong>Client:</strong> Jean Sportif</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>jean.sportif@email.com</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Lundi 05 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>10:00 - 11:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-user"></i>
+                                Contacter
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="seance-title">Séance de Musculation</span>
+                                <span class="status-badge status-reservee">Confirmée</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-user"></i>
+                                    <span><strong>Client:</strong> Marie Durand</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>marie.durand@email.com</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Jeudi 08 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>18:00 - 19:00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-user"></i>
+                                Contacter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profil Tab -->
+        <div id="profil" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-user-circle"></i>
+                        Mon profil professionnel
+                    </h2>
+                </div>
+
+                <form id="profilForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Nom</label>
+                            <input type="text" class="form-input" value="Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Prénom</label>
+                            <input type="text" class="form-input" value="Martin" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">Email</label>
+                        <input type="email" class="form-input" value="martin.dupont@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">Discipline sportive</label>
+                        <select class="form-select" required>
+                            <option value="musculation" selected>Musculation</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="crossfit">CrossFit</option>
+                            <option value="pilates">Pilates</option>
+                            <option value="cardio">Cardio</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">Années d'expérience</label>
+                        <input type="number" class="form-input" value="8" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">Description courte</label>
+                        <textarea class="form-textarea" required>Coach diplômé avec 8 ans d'expérience. Spécialisé en prise de masse et renforcement musculaire.</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Téléphone</label>
+                        <input type="tel" class="form-input" value="06 12 34 56 78">
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+                        <button type="button" class="btn btn-outline">
+                            <i class="fas fa-times"></i>
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i>
+                            Enregistrer les modifications
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ajouter Séance -->
+    <div id="addSeanceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Créer une nouvelle séance</h3>
+                <button class="modal-close" onclick="closeModal('addSeanceModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <form id="addSeanceForm">
+                <div class="form-group">
+                    <label class="form-label required">Date</label>
+                    <input type="date" class="form-input" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label required">Heure de début</label>
+                        <input type="time" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Durée (minutes)</label>
+                        <select class="form-select" required>
+                            <option value="30">30 minutes</option>
+                            <option value="45">45 minutes</option>
+                            <option value="60" selected>60 minutes</option>
+                            <option value="90">90 minutes</option>
+                            <option value="120">120 minutes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Lieu</label>
+                    <input type="text" class="form-input" placeholder="Ex: Salle A - Fitness Center">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Notes / Instructions</label>
+                    <textarea class="form-textarea" placeholder="Instructions pour le client..."></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('addSeanceModal')">
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-plus"></i>
+                        Créer la séance
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

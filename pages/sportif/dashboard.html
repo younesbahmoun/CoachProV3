@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Espace Sportif - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-dumbbell"></i>
+                CoachConnect
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="user-avatar">JS</div>
+                    <div>
+                        <div style="font-weight: 600;">Jean Sportif</div>
+                        <div style="font-size: 0.85rem; opacity: 0.9;">Sportif</div>
+                    </div>
+                </div>
+                <button class="btn btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Déconnexion
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchTab('dashboard')">
+                <i class="fas fa-home"></i>
+                Tableau de bord
+            </button>
+            <button class="nav-tab" onclick="switchTab('mes-seances')">
+                <i class="fas fa-calendar-check"></i>
+                Mes réservations
+            </button>
+            <button class="nav-tab" onclick="switchTab('seances-disponibles')">
+                <i class="fas fa-search"></i>
+                Séances disponibles
+            </button>
+            <button class="nav-tab" onclick="switchTab('coachs')">
+                <i class="fas fa-users"></i>
+                Nos coachs
+            </button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Stats Cards -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>2</h3>
+                        <p>Séances réservées</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>3h00</h3>
+                        <p>Temps d'entraînement</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>15</h3>
+                        <p>Séances disponibles</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prochaines Séances -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar-alt"></i>
+                        Mes prochaines séances
+                    </h2>
+                    <button class="btn btn-outline btn-sm" onclick="switchTab('mes-seances')">
+                        Voir tout
+                    </button>
+                </div>
+
+                <div class="seance-grid">
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Martin Dupont</span>
+                                <span class="discipline-badge">Musculation</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Lundi 05 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>10:00 - 11:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-danger btn-sm">
+                                <i class="fas fa-times"></i>
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Sophie Laurent</span>
+                                <span class="discipline-badge" style="background: var(--secondary-color);">Yoga</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Mercredi 07 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>18:00 - 19:30</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>90 min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-danger btn-sm">
+                                <i class="fas fa-times"></i>
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Séances Recommandées -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-star"></i>
+                        Séances recommandées pour vous
+                    </h2>
+                </div>
+
+                <div class="seance-grid">
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Thomas Bernard</span>
+                                <span class="discipline-badge" style="background: var(--danger-color);">CrossFit</span>
+                                <span class="status-badge status-disponible">Disponible</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Lundi 06 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>14:00 - 15:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-euro-sign"></i>
+                                    <span>45€</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-success btn-sm" onclick="reserverSeance(this)">
+                                <i class="fas fa-check"></i>
+                                Réserver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mes Séances Tab -->
+        <div id="mes-seances" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-calendar-check"></i>
+                        Mes réservations
+                    </h2>
+                </div>
+
+                <div class="seance-grid">
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Martin Dupont</span>
+                                <span class="discipline-badge">Musculation</span>
+                                <span class="status-badge status-reservee">Réservée</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Lundi 05 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>10:00 - 11:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Salle A - Fitness Center</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-danger btn-sm" onclick="annulerSeance(this)">
+                                <i class="fas fa-times"></i>
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Sophie Laurent</span>
+                                <span class="discipline-badge" style="background: var(--secondary-color);">Yoga</span>
+                                <span class="status-badge status-reservee">Réservée</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Mercredi 07 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>18:00 - 19:30</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>90 min</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>Studio Zen</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-danger btn-sm" onclick="annulerSeance(this)">
+                                <i class="fas fa-times"></i>
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Séances Disponibles Tab -->
+        <div id="seances-disponibles" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-search"></i>
+                        Séances disponibles
+                    </h2>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <select class="btn" style="padding: 0.5rem 1rem;">
+                            <option>Toutes les disciplines</option>
+                            <option>Musculation</option>
+                            <option>Yoga</option>
+                            <option>CrossFit</option>
+                            <option>Pilates</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="seance-grid">
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Thomas Bernard</span>
+                                <span class="discipline-badge" style="background: var(--danger-color);">CrossFit</span>
+                                <span class="status-badge status-disponible">Disponible</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Lundi 06 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>14:00 - 15:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-euro-sign"></i>
+                                    <span>45€</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-eye"></i>
+                                Détails
+                            </button>
+                            <button class="btn btn-success btn-sm" onclick="reserverSeance(this)">
+                                <i class="fas fa-check"></i>
+                                Réserver
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Marie Petit</span>
+                                <span class="discipline-badge" style="background: #9333ea;">Pilates</span>
+                                <span class="status-badge status-disponible">Disponible</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Jeudi 08 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>09:00 - 10:00</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>60 min</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-euro-sign"></i>
+                                    <span>40€</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-eye"></i>
+                                Détails
+                            </button>
+                            <button class="btn btn-success btn-sm" onclick="reserverSeance(this)">
+                                <i class="fas fa-check"></i>
+                                Réserver
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="seance-card">
+                        <div class="seance-info">
+                            <div class="seance-header">
+                                <span class="coach-name">Lucas Martin</span>
+                                <span class="discipline-badge">Musculation</span>
+                                <span class="status-badge status-disponible">Disponible</span>
+                            </div>
+                            <div class="seance-details">
+                                <div class="seance-detail">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Vendredi 09 Jan 2025</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>16:00 - 17:30</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <span>90 min</span>
+                                </div>
+                                <div class="seance-detail">
+                                    <i class="fas fa-euro-sign"></i>
+                                    <span>55€</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seance-actions">
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-eye"></i>
+                                Détails
+                            </button>
+                            <button class="btn btn-success btn-sm" onclick="reserverSeance(this)">
+                                <i class="fas fa-check"></i>
+                                Réserver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coachs Tab -->
+        <div id="coachs" class="tab-content">
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users"></i>
+                        Nos coachs professionnels
+                    </h2>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+                        <div style="width: 100%; display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="stat-icon blue" style="width: 70px; height: 70px; font-size: 2rem;">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Martin Dupont</h3>
+                                <span class="discipline-badge">Musculation</span>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem;">
+                            Coach diplômé avec 8 ans d'expérience. Spécialisé en prise de masse et renforcement musculaire.
+                        </p>
+                        <div style="display: flex; gap: 0.5rem; width: 100%;">
+                            <button class="btn btn-outline btn-sm" style="flex: 1;">
+                                <i class="fas fa-eye"></i>
+                                Voir profil
+                            </button>
+                            <button class="btn btn-primary btn-sm" style="flex: 1;">
+                                <i class="fas fa-calendar"></i>
+                                Séances
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+                        <div style="width: 100%; display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="stat-icon green" style="width: 70px; height: 70px; font-size: 2rem;">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Sophie Laurent</h3>
+                                <span class="discipline-badge" style="background: var(--secondary-color);">Yoga</span>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem;">
+                            Professeur de yoga certifiée depuis 10 ans. Cours de Hatha, Vinyasa et méditation.
+                        </p>
+                        <div style="display: flex; gap: 0.5rem; width: 100%;">
+                            <button class="btn btn-outline btn-sm" style="flex: 1;">
+                                <i class="fas fa-eye"></i>
+                                Voir profil
+                            </button>
+                            <button class="btn btn-primary btn-sm" style="flex: 1;">
+                                <i class="fas fa-calendar"></i>
+                                Séances
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="flex-direction: column; align-items: flex-start;">
+                        <div style="width: 100%; display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="stat-icon orange" style="width: 70px; height: 70px; font-size: 2rem;">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Thomas Bernard</h3>
+                                <span class="discipline-badge" style="background: var(--danger-color);">CrossFit</span>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem;">
+                            Coach CrossFit Level 2. Expert en conditionnement physique et entraînement fonctionnel.
+                        </p>
+                        <div style="display: flex; gap: 0.5rem; width: 100%;">
+                            <button class="btn btn-outline btn-sm" style="flex: 1;">
+                                <i class="fas fa-eye"></i>
+                                Voir profil
+                            </button>
+                            <button class="btn btn-primary btn-sm" style="flex: 1;">
+                                <i class="fas fa-calendar"></i>
+                                Séances
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Switch between tabs
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.closest('.nav-tab').classList.add('active');
+        }
+
+        // Réserver une séance
+        function reserverSeance(button) {
+            if (confirm('Confirmer la réservation de cette séance ?')) {
+                const card = button.closest('.seance-card');
+                const statusBadge = card.querySelector('.status-badge');
+                
+                // Change status
+                statusBadge.textContent = 'Réservée';
+                statusBadge.classList.remove('status-disponible');
+                statusBadge.classList.add('status-reservee');
+                
+                // Change button
+                button.outerHTML = '<button class="btn btn-danger btn-sm" onclick="annulerSeance(this)"><i class="fas fa-times"></i> Annuler</button>';
+                
+                alert('Séance réservée avec succès !');
+            }
+        }
+
+        // Annuler une réservation
+        function annulerSeance(button) {
+            if (confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')) {
+                const card = button.closest('.seance-card');
+                
+                // Option 1: Remove the card
+                card.style.opacity = '0';
+                setTimeout(() => {
+                    card.remove();
+                }, 300);
+                
+                alert('Réservation annulée avec succès !');
+            }
+        }
+    </script>
+</body>
+</html>
