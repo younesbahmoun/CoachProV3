@@ -32,5 +32,8 @@ $_SESSION["user"] = [
 require_once __DIR__ . "/app/models/Userr.php";
 require_once __DIR__ . "/app/models/Database.php";
 $userr = new Userr();
-var_dump($userr->allCoachs());
+$users = $userr->allCoachs();
+echo "<pre>";
+print_r($users);
+echo "</pre>";
 // print_r(PDO::getAvailableDrivers());

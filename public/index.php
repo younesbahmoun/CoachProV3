@@ -1,89 +1,39 @@
 <?php
-/*
-declare(strict_types = 1);
-echo "hello index.php";
-echo "<br>";
-echo $_SERVER["REQUEST_URI"];
-echo "<br>";
-echo parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-echo "<br>";
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$base = "/coachprov3";
-// switch($path) {
-//     case "$base/index.php":
-//     case "$base/":
-//         echo "home";
-//         break;
-//     case "$base/about":
-//         echo "about page";
-//         break;
-//     default:
-//         http_response_code(404);
-//         echo 'Page non trouvée';
-// }
-require_once __DIR__ . "/../core/Router.php";
-$router = new Router();
-// coachprov3
-$router->add("$base/", function() {
-    echo "This is Home Page";
-});
-// 
-$router->add("$base/", function() {
-    echo "This is Home Page";
+// public/index.php
+
+session_start();
+
+// Autoloading
+spl_autoload_register(function ($class) {
+    $paths = [
+        __DIR__ . "/../core/{$class}.php",
+        __DIR__ . "/../app/Controllers/{$class}.php",
+        __DIR__ . "/../app/Repositories/{$class}.php",
+        __DIR__ . "/../app/Models/{$class}.php",
+        __DIR__ . "/../config/{$class}.php"
+    ];
+
+    foreach ($paths as $path) {
+        if (file_exists($path)) {
+            require_once $path;
+            return;
+        }
+    }
 });
 
-$router->add("$base/index.php", function() {
-    echo "This is Home Page";
-});
+// Load Configuration
+require_once __DIR__ . "/../config/Database.php";
 
-$router->add("$base/about", function() {
-    echo "This is About Page";
-});
+// Initialize Router
+// Adjust the base path if your project is in a subdirectory, 
+// e.g., if URL is localhost/CoachProV3/public/, base path might be /CoachProV3/public
+// For strictly /CoachProV3:
+$basePath = '/CoachProV3';
+define('BASE_URL', $basePath);
+$router = new Router($basePath);
 
-$router->add("$base/products/{id}", function ($id) {
-    echo "This page products id = $id";
-});
-$router->add("$base/products/{id}/orders/{order_id}", function ($id, $order_id) {
-    echo "This page products id = $id, order_id = $order_id";
-});
+// Load Routes
+require_once __DIR__ . "/../routes/web.php";
 
-$router->dispatch($path);
-
-// require_once __DIR__ . "/../core/Router.php";
-// $router = new Router();
-
-// $router->get('/coachprov3/', function () {echo "Accueil";});
-// // $router->get('/user/{id}', fn($id) => echo "Utilisateur {$id}");
-// // $router->post('/user', fn() => echo "Créer utilisateur");
-
-// $router->dispatch();
-*/
-
-// require_once 'controller/stagiaire_controller.php';
-// // listeStagiairesAction();
-// if (isset($_GET['action'])) {
-//     $action = $_GET['action'];
-//     switch ($action) {
-//         case 'create' : 
-//             createAction();
-//             break;
-//         case 'list' : 
-//             listeStagiairesAction();
-//             break;
-//         case 'destroy' : 
-//             destroyAction();
-//             break;
-//         case 'edit' : 
-//             editAction();
-//             break;
-//         case 'delete' : 
-//             deleteMoaadAction();
-//             break;
-//         case 'update' : 
-//             updateAction();
-//             break;
-//         default:
-//             listeStagiairesAction();
-
-//     }
-// }
+// Dispatch
+$router->resolve();
